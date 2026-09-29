@@ -1,0 +1,12 @@
+# Secrets / credentials — never commit
+.env
+gatividyut-private/
+
+# Explicitly marked as off-limits
+DO_NOT_UPLOAD_HERE
+
+# OS cruft
+.DS_Store
+
+# Local build/deploy artifacts
+public_html/*.zip

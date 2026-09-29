@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f3f4f3" />
+  <meta name="description" content="Northern Railways, Jammu Division, Electrical General Branch station and equipment maintenance schedule directory." />
+  <title>Electrical General Branch | Jammu Division</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="station-map.css" />
+  <link rel="stylesheet" href="station-workspace.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Northern Railways Jammu Division GatiVidyut home"><img class="railway-logo" src="indian-railways-logo.png" alt="Indian Railways logo"><span class="brand-name">NORTHERN RAILWAYS<small>JAMMU DIVISION</small><b class="brand-gatividyut">GatiVidyut</b><b class="brand-branch">ELECTRICAL GENERAL BRANCH</b></span></a>
+    <nav class="main-nav" aria-label="Main navigation"><a class="active" href="#directory">Station network</a><a href="#map">Jurisdiction map</a><a href="#scheduleTracker">Schedule tracker</a><a href="#failures">Failure Report</a><a href="#about">Division overview</a></nav>
+    <a class="contact-link" href="#directory">Open station directory <span>↓</span></a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main id="home">
+    <section class="hero" id="explore">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> Electrical General Branch · Jammu Division</div>
+        <h1>One division.<br>One connected <em>network.</em></h1>
+        <p class="hero-lede">A station directory and maintenance schedule workspace for the Jammu Division network, including the Kashmir Valley and Kangra Valley sections.</p>
+        <div class="hero-actions"><a class="button button-dark" href="#directory">View station network <span>↓</span></a><span class="quiet-note"><span class="pulse"></span> 7 route and depot groups</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Railway tracks in a mountain landscape">
+        <img src="assets/jammu-illustrated-hero-approved.png" alt="Jammu Division Electrical General illustrated railway poster with mountain scenery, trains, Chenab and Anji bridges" />
+
+        <div class="visual-shade"></div>
+        <div class="image-caption"><span class="caption-pin">⌖</span><span><strong>Jammu Division</strong><small>Railway routes and stations · Image provided by user</small></span></div>
+        <div class="visual-index">01 <span>/</span> 03</div>
+      </div>
+      <div class="hero-bottom"><span>01 — Broad Gauge</span><span>02 — USBRL</span><span>03 — Kangra Valley NG</span><span class="scroll-hint">NETWORK ROUTES ↓</span></div>
+    </section>
+
+    <section class="jurisdiction-map section-wrap" id="map">
+      <div class="section-heading map-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> Jammu Division network map</div><h2>Jammu Division<br><em>jurisdiction.</em></h2></div><p>Station lights show maintenance status across the Jammu Division network. Select a light to inspect its schedules.</p></div>
+      <div class="map-meta"><span><i></i> JAMMU DIVISION · ROUTE AND STATION MAP</span><span>USER PROVIDED JURISDICTION PDF</span></div>
+      <a class="official-map-frame" href="assets/jammu-division-verified.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full Jammu Division jurisdiction map">
+        <img src="assets/jammu-division-verified.png" alt="Jammu Division jurisdiction map showing railway routes, stations, river, and map legend" />
+      </a>
+      <div class="map-footer"><span>Jammu Division jurisdiction map</span><a href="assets/jammu-division-verified.png" target="_blank" rel="noopener noreferrer">Open full map image ↗</a><a href="assets/jammu-division-source.pdf" target="_blank" rel="noopener noreferrer">Source PDF ↗</a></div>
+    </section>
+
+    <section class="schedule-tracker section-wrap" id="scheduleTracker"><div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> Station-specific maintenance reminders</div><h2>Schedule<br><em>tracker.</em></h2></div><p>Review completed work, upcoming schedules, and overdue maintenance. Each entry identifies its station and individual asset; select one to edit that exact schedule.</p></div><p class="tracker-legend">Completed uses the Last Done date. Scheduled and Overdue use the Next Due date; a completed item may also appear in either column to show its next action.</p><div class="tracker-columns"><section class="tracker-column completed-column"><header><h3>Completed</h3><span id="completedCount">00</span></header><div class="tracker-list" id="completedSchedules"></div></section><section class="tracker-column scheduled-column"><header><h3>Scheduled</h3><span id="scheduledCount">00</span></header><div class="tracker-list" id="scheduledSchedules"></div></section><section class="tracker-column overdue-column"><header><h3>Overdue reminders</h3><span id="overdueCount">00</span></header><div class="tracker-list" id="overdueSchedules" aria-live="polite"></div></section></div></section>
+
+    <section class="failure-section section-wrap" id="failures"><div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> Electrical General Branch · all stations</div><h2>Failure<br><em>Report.</em></h2></div><div class="failure-intro"><p>Log, review, and update failures for individual substations, panels, transformers, pumps, and other station assets.</p><button class="button button-dark" id="addFailureReport" type="button">Log failure report <span>＋</span></button></div></div><div class="failure-report-meta"><strong id="failureReportCount">00</strong><span>reported failures across the station network</span></div><div class="failure-report-list" id="failureReportList"></div></section>
+
+    <section class="directory section-wrap" id="directory">
+      <div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> Electrical General Branch</div><h2>Stations &amp;<br><em>assets.</em></h2></div><p>Choose a route or depot group to view its stations, station codes and Electrical General Branch asset schedules.</p></div>
+      <div class="search-panel">
+        <div class="search-box"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="Search depot, route, station or code" aria-label="Search depots, routes, stations and station codes" /><button class="clear-search" id="clearSearch" type="button" aria-label="Clear search" hidden>×</button><kbd>Ctrl K</kbd></div>
+        <div class="filter-row" aria-label="Filter depot groups by section type"><span class="filter-label">FILTER BY SECTION</span><div class="section-filters" id="sectionFilters"></div></div>
+      </div>
+      <div class="results-meta"><span><strong id="resultCount">07</strong> <span id="resultLabel">groups</span></span><span class="station-total" id="stationTotal"></span></div>
+      <div class="depot-grid" id="depotGrid"></div>
+      <div class="directory-foot"><span>Electrical General Branch directory</span><span>Select a schedule cell to add or update maintenance details.</span></div>
+    </section>
+
+    <section class="manifesto" id="how"><div class="manifesto-inner"><div class="eyebrow light"><span class="eyebrow-line"></span> Electrical General · Jammu Division</div><h2>Powering the<br>Jammu rail <em>network.</em></h2><div class="manifesto-bottom"><p>Track station assets and plan electrical maintenance across Jammu Division, one individual unit at a time.</p><a href="#directory" class="round-arrow" aria-label="Open station directory">↓</a></div></div><div class="manifesto-graphic" role="img" aria-label="Jammu Division railway network connected to electrical substations, transformers, and overhead power lines"><svg class="division-power-art" viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" aria-labelledby="powerArtTitle powerArtDesc"><title id="powerArtTitle">Jammu Division Electrical General Branch</title><desc id="powerArtDesc">A stylized Jammu Division rail route connected to substations, transformers, and electric traction infrastructure.</desc><defs><linearGradient id="routeGlow" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#f2c64d"/><stop offset="1" stop-color="#f4df91"/></linearGradient></defs><text x="230" y="40" text-anchor="middle" fill="#f2c64d" font-family="Barlow Condensed,Arial Narrow,sans-serif" font-size="30" font-weight="700" letter-spacing="2">JAMMU DIVISION</text><text x="230" y="62" text-anchor="middle" fill="#d7e0e9" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="2">ELECTRICAL GENERAL BRANCH</text><path d="M62 342 C102 316 110 282 150 259 S206 213 218 179 S267 133 281 101 S325 87 350 78" fill="none" stroke="#d7e0e9" stroke-opacity=".24" stroke-width="9"/><path d="M62 342 C102 316 110 282 150 259 S206 213 218 179 S267 133 281 101 S325 87 350 78" fill="none" stroke="url(#routeGlow)" stroke-width="3"/><g fill="#173f68" stroke="#f2c64d" stroke-width="3"><circle cx="62" cy="342" r="7"/><circle cx="110" cy="294" r="7"/><circle cx="158" cy="254" r="7"/><circle cx="218" cy="179" r="7"/><circle cx="281" cy="101" r="7"/><circle cx="350" cy="78" r="7"/></g><g fill="#e8edf2" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing=".6"><text x="28" y="365">PATHANKOT</text><text x="64" y="280">JAMMU TAWI</text><text x="124" y="239">UDHAMPUR</text><text x="186" y="164">KATRA</text><text x="247" y="86">SRINAGAR</text><text x="358" y="81">BARAMULLA</text></g><g transform="translate(322 184)" stroke="#d8e2ed" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M48 0 8 126M48 0l40 126M20 90h56M27 68h42M34 46h28M41 24h14M14 108h68M0 126h96M20 90 4 108M76 90l16 18M27 68 16 90M69 68l11 22M34 46l-7 22M62 46l7 22"/><path d="M5 35h86M14 17h67M-2 53h100" stroke="#f2c64d" stroke-opacity=".85"/></g><path d="m406 122-15 28h13l-8 22 24-32h-14l9-18z" fill="#f2c64d"/><g font-family="IBM Plex Mono,monospace" font-size="8" text-anchor="middle"><rect x="24" y="385" width="104" height="24" rx="2" fill="#173f68" stroke="#526a7f"/><text x="76" y="400" fill="#f2c64d">SUBSTATIONS</text><rect x="143" y="385" width="92" height="24" rx="2" fill="#173f68" stroke="#526a7f"/><text x="189" y="400" fill="#f2c64d">HT / LT PANELS</text><rect x="250" y="385" width="104" height="24" rx="2" fill="#173f68" stroke="#526a7f"/><text x="302" y="400" fill="#f2c64d">TRANSFORMERS</text><rect x="369" y="385" width="68" height="24" rx="2" fill="#b63d42" stroke="#e88989"/><text x="403" y="400" fill="#fff">POWER</text></g></svg></div></section>
+
+    <section class="cta" id="about"><div class="division-overview"><div class="eyebrow"><span class="eyebrow-line"></span> Northern Railway</div><h2>Jammu<br><em>Division.</em></h2><p>Serving the northernmost reaches of the railway network, Jammu Division connects communities across Jammu and Kashmir and links them with destinations beyond the region. Its routes span the Jammu–Pathankot corridor, the Udhampur–Srinagar–Baramulla Rail Link and the scenic Kangra Valley narrow-gauge line. This GatiVidyut directory supports the Electrical General Branch with a clear view of stations, railway assets and maintenance schedules.</p></div><a class="button button-dark" href="#directory">Open station directory <span>↑</span></a></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#home"><img class="railway-logo" src="indian-railways-logo.png" alt=""><span class="brand-name">NORTHERN RAILWAYS<small>JAMMU DIVISION</small><b class="brand-branch">ELECTRICAL GENERAL BRANCH</b></span></a><span>Station directory · Asset schedules</span><span>Jammu Division network</span><a href="#directory">Back to station directory ↑</a></footer>
+  <dialog class="schedule-dialog" id="scheduleDialog" aria-labelledby="scheduleTitle">
+    <form method="dialog" class="dialog-top"><div><h2 id="scheduleTitle">Equipment Assets</h2><p class="dialog-context" id="scheduleContext"></p></div><button class="dialog-close" aria-label="Close schedule">×</button></form>
+    <section class="asset-manager" id="assetManager"><form class="add-asset-form" id="addAssetForm"><label for="newAssetName">Asset name / rating</label><div><input id="newAssetName" type="text" placeholder="e.g. 33 kV Substation" required><button class="button button-dark" type="submit">Add asset <span>＋</span></button></div></form><div class="asset-unit-list" id="assetUnitList"></div></section>
+    <section class="unit-schedule-editor" id="unitScheduleEditor" hidden><button class="back-to-assets" id="backToAssets" type="button">← Back to asset list</button><div class="active-asset-name" id="activeAssetName"></div><div class="schedule-tabs" role="tablist" aria-label="Schedule interval"></div><div class="schedule-editor"><label class="asset-rating-field" for="assetRating">Rating<input id="assetRating" type="text" placeholder="Enter rating"></label><div class="schedule-dates"><label class="schedule-location">Location<input id="scheduleLocation" type="text" placeholder="Enter location"></label><label>Last Done<input id="lastDone" type="date"></label><label>Next Due (auto-calculated)<input id="nextDue" type="date"></label><label>SSE<input id="scheduleSSE" type="text" placeholder="Enter SSE"></label><label>JE<input id="scheduleJE" type="text" placeholder="Enter JE"></label></div><label for="scheduleNotes">Schedule details</label><textarea id="scheduleNotes" rows="5" placeholder="Add planned work, checks, or maintenance notes..."></textarea></div><div class="dialog-actions"><button class="clear-schedule" id="clearSchedule" type="button">Clear this interval</button><button class="button button-dark save-schedule" id="saveSchedule" type="button">Save this schedule <span>✓</span></button></div></section>
+  </dialog>
+  <dialog class="failure-dialog" id="failureDialog" aria-labelledby="failureDialogTitle"><form method="dialog" class="dialog-top"><div><div class="eyebrow"><span class="eyebrow-line"></span> Station asset incident log</div><h2 id="failureDialogTitle">Failure Report</h2><p class="dialog-context" id="failureDialogContext">Record a failure for a specific asset.</p></div><button class="dialog-close" id="closeFailureDialog" type="button" aria-label="Close failure report">×</button></form><form id="failureForm"><div class="failure-fields"><label>Station<select id="failureStation" required></select></label><label>Equipment<select id="failureEquipment" required></select></label><label>Asset<select id="failureAsset" required></select></label><label>Failure date<input id="failureDate" type="date" required></label><label>Severity<select id="failureSeverity"><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select></label><label>Status<select id="failureStatus"><option>Open</option><option>Under Repair</option><option>Restored</option></select></label><label>Reported by<input id="failureReportedBy" type="text" placeholder="Name or designation"></label><label>Restored on<input id="failureRestoredOn" type="date"></label></div><label class="failure-long-field">Failure details<textarea id="failureDetails" rows="4" required placeholder="Describe the fault, symptoms, and impact..."></textarea></label><label class="failure-long-field">Action taken<textarea id="failureAction" rows="3" placeholder="Record inspection, repair, or follow-up actions..."></textarea></label><div class="dialog-actions"><button class="clear-schedule" id="cancelFailureReport" type="button">Cancel</button><button class="button button-dark save-schedule" type="submit">Save failure report <span>✓</span></button></div></form></dialog>
+  <script src="script.js"></script>
+  <script src="failure-reports.js"></script>
+  <script src="verified-map-data.js"></script>
+  <script src="station-map.js"></script>
+  <script src="station-workspace.js"></script>
+  <script src="schedule-pdfs.js"></script>
+</body>
+</html>

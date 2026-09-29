@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Employee Login | GatiVidyut</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <main class="access-layout">
+    <section class="access-brand">
+      <img src="indian-railways-logo.png" alt="Indian Railways" width="92" height="92">
+      <p>NORTHERN RAILWAY · JAMMU DIVISION</p>
+      <h1>GatiVidyut</h1>
+      <h2>Electrical General Branch</h2>
+      <p class="access-description">Employee access to station assets, maintenance schedules and failure reports.</p>
+    </section>
+    <section class="access-card" aria-labelledby="accessTitle">
+      <div class="access-tabs" role="tablist" aria-label="Employee access">
+        <button id="loginTab" role="tab" aria-selected="true" aria-controls="loginForm" type="button">Sign in</button>
+        <button id="registerTab" role="tab" aria-selected="false" aria-controls="registerForm" type="button">Register</button>
+        <button id="otpTab" role="tab" aria-selected="false" aria-controls="otpForm" type="button">Email OTP</button>
+      </div>
+      <h2 id="accessTitle">Employee sign in</h2>
+      <p class="setup-note">Employees must register with their employee ID. Access begins after administrator approval.</p>
+      <form id="loginForm" role="tabpanel" aria-labelledby="loginTab">
+        <label for="employeeId">Employee ID</label>
+        <input id="employeeId" name="employeeId" autocomplete="username" required maxlength="64">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button class="primary" type="submit" disabled>Sign in</button>
+      </form>
+      <form id="registerForm" role="tabpanel" aria-labelledby="registerTab" hidden>
+        <label for="fullName">Full name</label>
+        <input id="fullName" name="fullName" autocomplete="name" required maxlength="120">
+        <label for="registerId">Employee ID</label>
+        <input id="registerId" name="employeeId" autocomplete="username" required maxlength="64">
+        <label for="registerPassword">Create password</label>
+        <input id="registerPassword" name="password" type="password" autocomplete="new-password" required minlength="12" aria-describedby="passwordHint">
+        <small id="passwordHint">Use 12–72 characters; non-English characters may use more than one byte.</small>
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required minlength="12">
+        <button class="primary" type="submit" disabled>Request employee registration</button>
+      </form>
+      <form id="otpForm" role="tabpanel" aria-labelledby="otpTab" hidden>
+        <p>For Sr. DEE Sir and the site owner.</p>
+        <label for="otpEmail">Authorised email address</label>
+        <input id="otpEmail" name="email" type="email" autocomplete="email" maxlength="254" aria-describedby="otpSetupNote" required>
+        <button id="sendEmailOtp" class="primary" type="submit" disabled>Send OTP</button>
+        <div id="otpVerifyFields" hidden>
+          <label for="emailOtpCode">Four-digit code</label>
+          <input id="emailOtpCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}">
+          <button id="verifyEmailOtp" class="primary" type="button">Verify and sign in</button>
+        </div>
+        <p id="otpSetupNote" role="status">Use your approved email address. Codes expire in 5 minutes. You can request another code after 60 seconds.</p>
+      </form>
+      <p class="access-footer">For authorised railway employees.</p>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>
