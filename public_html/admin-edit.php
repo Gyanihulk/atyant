@@ -11,6 +11,24 @@ $error='';
 if($_SERVER['REQUEST_METHOD']==='POST'){
     requirePost();
     $status=$_POST['status']??'';$admin=isset($_POST['admin'])?1:0;
+    if($status==='delete'){
+        if($isSelf)$error='You cannot delete your own account.';
+        elseif(($_POST['confirmDelete']??'')!=='1')$error='Confirm permanent account deletion.';
+        else{
+            $db->exec('BEGIN IMMEDIATE');
+            $remaining=$db->prepare("SELECT COUNT(*) FROM accounts WHERE admin=1 AND status='approved' AND id<>?");
+            $remaining->execute([$account['id']]);
+            if(!(int)$remaining->fetchColumn()){
+                $db->exec('ROLLBACK');$error='At least one approved administrator must remain.';
+            }else{
+                if($db->query("SELECT name FROM sqlite_master WHERE type='table' AND name='approval_mail'")->fetchColumn()){
+                    $db->prepare('DELETE FROM approval_mail WHERE account_id=?')->execute([$account['id']]);
+                }
+                $db->prepare('DELETE FROM accounts WHERE id=?')->execute([$account['id']]);
+                $db->exec('COMMIT');header('Location: admin.php');exit;
+            }
+        }
+    }else{
     if(!in_array($status,['approved','pending','rejected','disabled'],true))$error='Choose a valid access status.';
     elseif($isSelf && ($admin===0 || $status!=='approved'))$error='You cannot remove your own admin role or access.';
     elseif((int)$account['admin']===1 && $admin===0){
@@ -21,18 +39,20 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $db->prepare('UPDATE accounts SET status=?,admin=? WHERE id=?')->execute([$status,$admin,$account['id']]);
         header('Location: admin.php');exit;
     }
+    }
     $account['status']=$status;$account['admin']=$admin;
 }
-?><!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Edit account | GatiVidyut</title><link rel="stylesheet" href="login.css?v=<?=filemtime(__DIR__.'/login.css')?>"><body><main class="admin-page"><a href="admin.php">← User management</a><h1>Edit account</h1>
-<section class="access-card" style="max-width:520px">
+?><!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Edit account | GatiVidyut</title><link rel="stylesheet" href="login.css?v=<?=filemtime(__DIR__.'/login.css')?>"><body><main class="admin-page admin-edit-page"><a href="admin.php">← User management</a><h1>Edit account</h1>
+<section class="access-card">
 <p><strong><?=esc($account['name'])?></strong><br>Employee ID: <code><?=esc($account['employee'])?></code></p>
 <?php if($isSelf): ?><p class="setup-note">This is your own account. Your admin role and access cannot be changed from here.</p><?php else: ?>
 <?php if($error): ?><p role="alert" class="admin-error"><?=esc($error)?></p><?php endif ?>
-<form method="post">
+<form method="post" onsubmit="if(this.elements.status.value==='delete'){if(!confirm('Permanently delete this account? This cannot be undone.'))return false;this.elements.confirmDelete.value='1';}">
+<input type="hidden" name="confirmDelete" value="0">
 <input type="hidden" name="csrf" value="<?=esc(csrf())?>">
 <input type="hidden" name="id" value="<?=(int)$account['id']?>">
 <label>Access status<select name="status">
-<?php foreach(['pending'=>'Pending','approved'=>'Approved','rejected'=>'Rejected','disabled'=>'Disabled'] as $value=>$label): ?><option value="<?=$value?>"<?=$account['status']===$value?' selected':''?>><?=$label?></option><?php endforeach ?>
+<?php foreach(['pending'=>'Pending','approved'=>'Approved','rejected'=>'Rejected','disabled'=>'Disabled','delete'=>'Delete account (permanent)'] as $value=>$label): ?><option value="<?=$value?>"<?=$account['status']===$value?' selected':''?>><?=$label?></option><?php endforeach ?>
 </select></label>
 <label><input type="checkbox" name="admin" value="1" <?=$account['admin']?'checked':''?>> Admin role — can approve accounts and manage users</label>
 <button class="primary">Save changes</button>
